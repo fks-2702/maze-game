@@ -1,7 +1,7 @@
 import random
 
 def generate_maze(width, height):
-		maze = [[1] * (width * 2 + 1) for _ in range(height * 2 + 1)]
+		maze = [[1] * (width * 2 + 1) for i in range(height * 2 + 1)]
         #on initalize le labyrinthe
 		def depth_first_search(x, y):
 				directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
@@ -14,8 +14,9 @@ def generate_maze(width, height):
 						if 0 < nx < width * 2 and 0 < ny < height * 2 and maze[ny][nx]:
 								maze[y + dy][x + dx] = 0
 								maze[ny][nx] = 0
+								#on appelle la fonction pour la nouvelle position reccursivement
 								depth_first_search(nx, ny)
-
+        #on genere le labyrinthe
 		depth_first_search(1, 1)
 		maze[1][0] = 0  # entre
 		maze[height * 2 - 1][width * 2] = 0  # sortie
@@ -26,8 +27,9 @@ def print_maze(maze):
 		for row in maze:
 				print("".join(["#" if cell else " " for cell in row]))
 
-
+#dimension du labyrinthe de default
 width = 10
 height = 10
+#on genere le labyrinthe
 maze = generate_maze(width, height)
 print_maze(maze)
