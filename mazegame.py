@@ -12,7 +12,7 @@ def print_maze(maze):
 				if item == 0:
 					pyxel.blt(index * 16, column * 16, 0, 0, 0, 16,16)
 			else:
-				pyxel.rect(index*16,column*16,16,16,6)
+				pyxel.rect(index*16,column*16,16,16,0)
 		column += 1
 
 def isColliding(PlayerX, PlayerY, x2, y2, w2, h2):
@@ -24,6 +24,7 @@ def isColliding(PlayerX, PlayerY, x2, y2, w2, h2):
 def isEnd():
 	global PlayerX,PlayerY
 	if PlayerX > 272:
+		maze = generate_maze(width, height)
 		PlayerX = 0
 		PlayerY = 0
 
@@ -43,7 +44,7 @@ width = 8
 height = 8
 #on genere le labyrinthe
 maze = generate_maze(width, height)
-pyxel.init(width=272,height = 272, title= "Maze Generator")
+pyxel.init(width=272,height = 272, title= "Maze Runner")
 pyxel.load("my_resource.pyxres")
 
 def update():
@@ -51,13 +52,13 @@ def update():
 	if pyxel.btnp(pyxel.KEY_Q):
 		pyxel.quit()
 	if pyxel.btn(pyxel.KEY_D):
-		PlayerX += 1
+		PlayerX += 2
 	if pyxel.btn(pyxel.KEY_A):
-		PlayerX -= 1
+		PlayerX -= 2
 	if pyxel.btn(pyxel.KEY_W):
-		PlayerY -= 1
+		PlayerY -= 2
 	if pyxel.btn(pyxel.KEY_S):
-		PlayerY += 1
+		PlayerY += 2
 	isCollidingWithWall(maze)
 	isEnd()
 def draw():
