@@ -1,4 +1,5 @@
 from mazegen import *
+import pyxel
 PlayerX = 0
 PlayerY = 21
 def print_maze(maze):
